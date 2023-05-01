@@ -28,10 +28,6 @@ function App(props) {
     />
   ));
   const [tasks, setTasks] = useState(props.tasks);
-  const [filteredtasks, setFilteredTasks] = useState(props.tasks);
-
-  
-
   
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -66,7 +62,6 @@ function App(props) {
     const filteredTasks = tasks.filter((task) =>
       task.name.toLowerCase().includes(query.toLowerCase())
     );
-    
     setTasks(filteredTasks);
   }
 
@@ -100,7 +95,7 @@ function App(props) {
     <div className="container">
     <figure align="center">
       <img src={imgsrc} alt="Logo"></img>
-      <figcaption>TO-DO App</figcaption>
+      <figcaption>ToDo App</figcaption>
     </figure>
       <div><SearchBox handleSearch={handleSearch} /></div>
       <Form className="task-item" addTask={addTask} />
@@ -109,9 +104,9 @@ function App(props) {
       {filterList}
       </div>
       <h2 align="center">{headingText}</h2><br />
-<div className="card-grid">      
-  {taskList}
-</div>
+    <div className="card-grid">      
+      {taskList}
+    </div>
 
     </div>
   );
