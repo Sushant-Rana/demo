@@ -1,71 +1,91 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "../App.css"
 
-function Form(props) {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
-
-  function handleChange(e) {
-    setName(e.target.value);
+class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      date: "",
+      description: ""
+    };
   }
 
-  function handleChanged(e) {
-    setDate(e.target.value);
+  componentDidMount() {
+    console.log("Form component mounted");
   }
 
-
-  function handleChangedd(e) {
-    setDescription(e.target.value);
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Form component updated");
   }
-  function handleSubmit(e) {
+
+  componentWillUnmount() {
+    console.log("Form component unmounted");
+  }
+
+  handleChange = (e) => {
+    this.setState({ name: e.target.value });
+  }
+
+  handleChanged = (e) => {
+    this.setState({ date: e.target.value });
+  }
+
+  handleChangedd = (e) => {
+    this.setState({ description: e.target.value });
+  }
+
+  handleSubmit = (e) => {
     e.preventDefault();
-    props.addTask(name,date,description);
-    setName("");
+    this.props.addTask(this.state.name, this.state.date, this.state.description);
+    this.setState({ name: "", date: "", description: "" });
   }
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2 className="form">
-        <label htmlFor="new-todo-input" className="label__lg">
-          What needs to be done?
-        </label>
-      </h2>
-      <input
-        type="text"
-        id="new-todo-input"
-        className="input input__lg"
-        name="text"
-        autoComplete="off"
-        value={name}
-        placeholder="Heading"
-        onChange={handleChange}
-      />
-       <input
-        type="date"
-        id="new-todo-inp"
-        className="input input__lg"
-        name="text"
-        autoComplete="off"
-        min={new Date().toISOString().slice(0,10)}
-        value={date}
-        placeholder="Deadline"
-        onChange={handleChanged}
-      />
-      <input
-        type="text"
-        id="new-todo"
-        className="input input__lg"
-        name="text"
-        autoComplete="on"
-        value={description}
-        placeholder="Description"
-        onChange={handleChangedd}
-      />
-      <button type="submit" className="btn btn__primary btn__lg">
-        Add
-      </button>
-    </form>
-  );
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h2 className="form">
+          <label htmlFor="new-todo-input" className="label__lg">
+            What needs to be done?
+          </label>
+        </h2>
+        <input
+          type="text"
+          id="new-todo-input"
+          className="input input__lg"
+          name="text"
+          autoComplete="off"
+          value={this.state.name}
+          placeholder="Heading"
+          onChange={this.handleChange}
+        />
+        <input
+          type="date"
+          id="new-todo-inp"
+          className="input input__lg"
+          name="text"
+          autoComplete="off"
+          min={new Date().toISOString().slice(0,10)}
+          value={this.state.date}
+          placeholder="Deadline"
+          onChange={this.handleChanged}
+        />
+        <input
+          type="text"
+          id="new-todo"
+          className="input input__lg"
+          name="text"
+          autoComplete="on"
+          value={this.state.description}
+          placeholder="Description"
+          onChange={this.handleChangedd}
+        />
+        <button type="submit" className="btn btn__primary btn__lg">
+          Add
+        </button>
+      </form>
+    );
+  }
 }
 
 export default Form;
