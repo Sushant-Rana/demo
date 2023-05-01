@@ -6,7 +6,8 @@ import Todo from "./components/Todo"; //in-prog
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import SearchBox from "./components/searchBox";
-
+import './App.css';
+import imgsrc from './assets/logo.svg'
 
 //props=data=[]
 
@@ -26,6 +27,8 @@ function App(props) {
       setFilter={setFilter}
     />
   ));
+
+
   
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -48,20 +51,20 @@ function App(props) {
   }
 
   const [tasks, setTasks] = useState(props.tasks);
-  function addTask(name) {
-  const newTask ={id:nanoid(), name, completed: false };
+  function addTask(name,date,descript) {
+  const newTask ={id:nanoid(), name, deadline: date,description: descript,completed: false };
   setTasks([...tasks, newTask]);
   }
   function deleteTask(id) {
   const remainingTasks = tasks.filter((task) => id !== task.id);
   setTasks(remainingTasks);
   }
-  function editTask(id, newName) {
+  function editTask(id, newName,newDeadline) {
   const editedTaskList = tasks.map((task) => {
   // if this task has the same ID as the edited task
     if (id === task.id) {
       //
-      return {...task, name: newName}
+      return {...task, name: newName,deadline: new Date(newDeadline)}
     }
     return task;
   });
@@ -71,41 +74,40 @@ function App(props) {
   const taskList = tasks
   .filter(FILTER_MAP[filter])
   .map((task) => (
-  <Todo
-  id={task.id}
-  name={task.name}
-  completed={task.completed}
-  key={task.id}
-  toggleTaskCompleted={toggleTaskCompleted}
-  deleteTask={deleteTask}
-  editTask={editTask}
-  />
+    <Todo
+    id={task.id}
+    name={task.name}
+    completed={task.completed}
+    key={task.id}
+    deadline={task.deadline}
+    description={task.description}
+    toggleTaskCompleted={toggleTaskCompleted}
+    deleteTask={deleteTask}
+    editTask={editTask}
+    />
   ));
-
-
-
 
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
 
   return (
-    <div className="todoapp stack-large">
-    
-      <h1>TodoMatic</h1>
-      <SearchBox handleSearch={handleSearch} />
-      <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">
+    <div className="container">
+    <figure align="center">
+      <img src={imgsrc} alt="Logo"></img>
+      <figcaption>TO-DO App</figcaption>
+    </figure>
+      <div><SearchBox handleSearch={handleSearch} /></div>
+      <Form className="task-item" addTask={addTask} />
+      <br  />
+      <div className="filter-buttons">
       {filterList}
       </div>
-      <h2 id="list-heading">{headingText}</h2>
-      <ul
-        role="list"
-        className="todo-list stack-large stack-exception"
-        aria-labelledby="list-heading"
-      >
-        {taskList}
-      </ul>
+      <h2 align="center">{headingText}</h2><br />
+<div className="card-grid">      
+  {taskList}
+</div>
+
     </div>
   );
 }

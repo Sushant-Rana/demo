@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 
+import Deadline from "./deadlineBar";
+
 export default function Todo(props) {
+
     const [isEditing, setEditing] = useState(false);
     const [newName, setNewName] = useState('');
+    const [date,setDate]=useState('date')
+
     function handleChange(e) {
         setNewName(e.target.value);
       }
       function handleSubmit(e) {
         e.preventDefault();
-        props.editTask(props.id, newName);
-        setNewName("");
+        if (newName.trim() !== "") {
+        props.editTask(props.id, newName,date);
+        setNewName(newName);
         setEditing(false);
-      }
+      }else{alert("Please enter a valid value.");
+    }}
       
     const editingTemplate = (<form className="stack-small" onSubmit={handleSubmit}>
 
@@ -26,6 +33,17 @@ export default function Todo(props) {
   value={newName}
   onChange={handleChange}
 />
+<label className="todo-label" htmlFor={props.id}>
+              New deadline for {props.name}
+            </label>
+
+<input
+        type="date"
+        className="input"
+        placeholder="Set a deadline"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
 
           </div>
           <div className="btn-group">
@@ -46,37 +64,43 @@ export default function Todo(props) {
         </form>
       );
       const viewTemplate = (
-        <div className="stack-small">
-          <div className="c-cb">
+        <div className="card" task={props.id} data-deadline={props.deadline} >
+          <div className="card-xp">
               <input
                 id={props.id}
                 type="checkbox"
                 defaultChecked={props.completed}
                 onChange={() => props.toggleTaskCompleted(props.id)}
               />
-              <label className="todo-label" htmlFor={props.id}>
+              <label htmlFor={props.id}>
                 {props.name}
+                <br />{props.deadline}
               </label>
+             
             </div>
-                <div className="btn-group">
-                    <button type="button" className="btn" onClick={() => setEditing(true)}>
+
+            <div className="button-grid">
+            <button type="button" className="mocke" onClick={() => setEditing(true)}>
                     Edit <span className="visually-hidden">{props.name}</span>
                     </button>
-              <button
+            <button
                 type="button"
-                className="btn btn__danger"
+                className="delmocke"
                 onClick={() => props.deleteTask(props.id)}
               >
                 Delete <span className="visually-hidden">{props.name}</span>
-              </button>
+              </button></div>
+              
             </div>
-        </div>
+
+            
       );
       
     return (
-        <li className="todo">{isEditing ? editingTemplate : viewTemplate}
+        <li className="card-grid">{isEditing ? editingTemplate : viewTemplate}
         
       </li>
     );
   }
+  //<Deadline deadline= />
   

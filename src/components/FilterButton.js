@@ -1,11 +1,11 @@
 import React from "react";
-
+import "../App.css"
 function FilterButton(props) {
     return (
         
       <button
         type="button"
-        className="btn toggle-btn"
+        className="filter-button"
         aria-pressed={props.isPressed}
         onClick={() => props.setFilter(props.name)}
       >

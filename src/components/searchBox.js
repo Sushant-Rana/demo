@@ -12,11 +12,11 @@ function SearchBox(props) {
     setSearchQuery(event.target.value);
   }
 
-  return (
-    <form onSubmit={handleSearch}>
-      <input type="text" value={searchQuery} onChange={handleInputChange} />
-      <button type="submit">Search</button>
-    </form>
+  return (<div >
+    <form className="search-box" onSubmit={handleSearch}>
+      <input type="text" value={searchQuery} onChange={handleInputChange} placeholder="Enter here ..."/>
+      <button className="search-button" type="submit">Search</button>
+    </form></div>
   );
 }
 
