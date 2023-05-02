@@ -14,7 +14,7 @@ function SearchBox(props) {
 
   return (<div >
     <form className="search-box" onSubmit={handleSearch}>
-      <input type="text" value={searchQuery} onChange={handleInputChange} placeholder="Enter here ..."/>
+      <input type="text" value={searchQuery} onChange={handleInputChange} placeholder="Enter here ..." />
       <button className="search-button" type="submit">Search</button>
     </form></div>
   );

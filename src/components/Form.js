@@ -65,7 +65,7 @@ class Form extends Component {
           className="input input__lg"
           name="text"
           autoComplete="off"
-          min={new Date().toISOString().slice(0,10)}
+          min={new Date().toISOString().slice(0, 10)}
           value={this.state.date}
           placeholder="Deadline"
           onChange={this.handleChanged}

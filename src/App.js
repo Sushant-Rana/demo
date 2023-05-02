@@ -28,36 +28,36 @@ function App(props) {
     />
   ));
   const [tasks, setTasks] = useState(props.tasks);
-  
+
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         // use object spread to make a new object
         // whose `completed` prop has been inverted
-        return {...task, completed: !task.completed}
+        return { ...task, completed: !task.completed }
       }
       return task;
     });
     setTasks(updatedTasks);
   }
   var taskList = tasks
-  .filter(FILTER_MAP[filter])
-  .map((task) => (
-    <Todo
-    id={task.id}
-    name={task.name}
-    completed={task.completed}
-    key={task.id}
-    deadline={task.deadline}
-    description={task.description}
-    toggleTaskCompleted={toggleTaskCompleted}
-    deleteTask={deleteTask}
-    editTask={editTask}
-    />
-  ));
+    .filter(FILTER_MAP[filter])
+    .map((task) => (
+      <Todo
+        id={task.id}
+        name={task.name}
+        completed={task.completed}
+        key={task.id}
+        deadline={task.deadline}
+        description={task.description}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
 
-  
+
   function handleSearch(query) {
     const filteredTasks = tasks.filter((task) =>
       task.name.toLowerCase().includes(query.toLowerCase())
@@ -65,25 +65,25 @@ function App(props) {
     setTasks(filteredTasks);
   }
 
-  
-  function addTask(name,date,descript) {
-  const newTask ={id:nanoid(), name, deadline: date,description: descript,completed: false };
-  setTasks([...tasks, newTask]);
+
+  function addTask(name, date, descript) {
+    const newTask = { id: nanoid(), name, deadline: date, description: descript, completed: false };
+    setTasks([...tasks, newTask]);
   }
   function deleteTask(id) {
-  const remainingTasks = tasks.filter((task) => id !== task.id);
-  setTasks(remainingTasks);
+    const remainingTasks = tasks.filter((task) => id !== task.id);
+    setTasks(remainingTasks);
   }
-  function editTask(id, newName,newDeadline) {
-  const editedTaskList = tasks.map((task) => {
-  // if this task has the same ID as the edited task
-    if (id === task.id) {
-      //
-      return {...task, name: newName,deadline: new Date(newDeadline)}
-    }
-    return task;
-  });
-  setTasks(editedTaskList);
+  function editTask(id, newName, newDeadline) {
+    const editedTaskList = tasks.map((task) => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        //
+        return { ...task, name: newName, deadline: new Date(newDeadline) }
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
   }
 
 
@@ -93,20 +93,20 @@ function App(props) {
 
   return (
     <div className="container">
-    <figure align="center">
-      <img src={imgsrc} alt="Logo"></img>
-      <figcaption>ToDo App</figcaption>
-    </figure>
+      <figure align="center">
+        <img src={imgsrc} alt="Logo"></img>
+        <figcaption>ToDo App</figcaption>
+      </figure>
       <div><SearchBox handleSearch={handleSearch} /></div>
       <Form className="task-item" addTask={addTask} />
-      <br  />
+      <br />
       <div className="filter-buttons">
-      {filterList}
+        {filterList}
       </div>
       <h2 align="center">{headingText}</h2><br />
-    <div className="card-grid">      
-      {taskList}
-    </div>
+      <div className="card-grid">
+        {taskList}
+      </div>
 
     </div>
   );
