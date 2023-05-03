@@ -1,0 +1,8 @@
++ @babel/core@7.21.8
+updated 1 package and audited 2204 packages in 15.19s
+
+253 packages are looking for funding
+  run `npm fund` for details
+
+found 46 vulnerabilities (4 low, 16 moderate, 21 high, 5 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details

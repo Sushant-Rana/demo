@@ -1,6 +1,12 @@
 import React from "react";
+//import { CapButton } from "@capillarytech/cap-ui-library";
 import "../App.css"
+import {useSelector} from 'react-redux';
+
+
 function FilterButton(props) {
+  const data = useSelector(state=>props.name);
+  console.log(data);
     return (
         
       <button

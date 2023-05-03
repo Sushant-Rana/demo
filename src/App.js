@@ -6,9 +6,10 @@ import Todo from "./components/Todo"; //in-prog
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import SearchBox from "./components/searchBox";
+import Bank from './components/Bank'
 import './App.css';
-import imgsrc from './assets/logo.svg'
-
+import imgsrc from './assets/logo.svg';
+import Profile from './components/Profile';
 //props=data=[]
 
 function App(props) {
@@ -79,7 +80,7 @@ function App(props) {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         //
-        return { ...task, name: newName, deadline: new Date(newDeadline) }
+        return { ...task, name: newName, deadline: newDeadline }
       }
       return task;
     });
@@ -97,6 +98,8 @@ function App(props) {
         <img src={imgsrc} alt="Logo"></img>
         <figcaption>ToDo App</figcaption>
       </figure>
+      <Bank />
+      <Profile />
       <div><SearchBox handleSearch={handleSearch} /></div>
       <Form className="task-item" addTask={addTask} />
       <br />
