@@ -6,3 +6,12 @@ export const depositMoney=(amount)=>{
         payload:amount})
     }
 }
+
+export const profileSelector=(id)=>{
+    console.log(id);
+    return(dispatch)=>{
+        dispatch({
+            type:'change',
+        payload:id})
+    }
+}

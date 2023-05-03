@@ -99,7 +99,6 @@ function App(props) {
         <figcaption>ToDo App</figcaption>
       </figure>
       <Bank />
-      <Profile />
       <div><SearchBox handleSearch={handleSearch} /></div>
       <Form className="task-item" addTask={addTask} />
       <br />
