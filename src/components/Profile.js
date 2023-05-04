@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {actionCreators } from '../state/index'; // import your action creator
 
-function ProfileSwitcher() {
+function ProfileSwitcher(props) {
   const profiles = useSelector(state => state.profiles);
   const activeProfile = useSelector(state => state.activeProfile);
   const dispatch = useDispatch();
@@ -10,6 +10,18 @@ function ProfileSwitcher() {
   const handleProfileClick = (profile) => {
     dispatch(actionCreators(profile)); // set the active profile
   };
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+
+  function handleChangedd(e) {
+    setDescription(e.target.value);
+}
+function handleSubmit(e) {
+    e.preventDefault();
+    props.addTask(name, date, description);
+    setName("");
+}
 
   return (
     <div>
