@@ -3,11 +3,15 @@ import "../App.css"
 
 class Form extends Component {
   constructor(props) {
+
     super(props);
+ 
+    console.log(this.props);
     this.state = {
       name: "",
       date: "",
-      description: ""
+      description: "",
+      
     };
   }
 

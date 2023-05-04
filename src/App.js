@@ -6,6 +6,7 @@ import Todo from "./components/Todo"; //in-prog
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import SearchBox from "./components/searchBox";
+import ProfileButton from "./components/profileButton";
 import Bank from "./components/Bank";
 import Profile from "./components/Profile";
 
@@ -15,9 +16,11 @@ import imgsrc from './assets/logo.svg';
 
 function App(props) {
   const [pidList,setPidList]=useState(props.profile);
-  var tasks;
+
   const [filter, setFilter] = useState('All');
+  const [prof, setProf] = useState(pidList[0]);
   const [showlist,setShowlist]=useState(props.tasks);
+  const [tasks,settsaks]=useState(props.tasks);
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.completed,
@@ -32,17 +35,19 @@ function App(props) {
       setFilter={setFilter}
     />
   ));
-
- const Profile_NAMES = ['p1'];
- const ProfileList = Profile_NAMES.map((name) => (
-  <FilterButton
+  const PROFILE_MAP = {
+    Default: () => true,
+    sad: (task) => task.pid===prof,
+  };
+ const ProfileList = pidList.map((name) => (
+  <ProfileButton
     key={name}
     name={name}
-    isPressed={name === filter}
-    setFilter={setFilter}
+    isPressed={name === prof}
+    setProf={setProf}
   />
 ));
-
+console.log(`prof now is ${prof}`);
 
   function profileScreener(pid) {
     const remainingTasks = tasks.filter((task) => pid === task.pid);
@@ -63,9 +68,10 @@ function App(props) {
   }
   var taskList = showlist
     .filter(FILTER_MAP[filter])
+    .filter(PROFILE_MAP['sad'])
     .map((task) => (
       <Todo
-        pid={task.pid}
+        pid={prof}
         id={task.id}
         name={task.name}
         completed={task.completed}
@@ -87,13 +93,14 @@ function App(props) {
   }
 
   function addProfile(name) {
-    const newPid = { pid: nanoid(), name };
-    setPidList([...pidList, newPid]);
+    
+    setPidList([...pidList, name]);
   }
 
 
-  function addTask(name, date, descript, pid) {
-    const newTask = { id: nanoid(), name, deadline: date, description: descript, completed: false, pid: pid };
+  function addTask(name, date, descript) {
+    const newTask = { id: nanoid(), name, deadline: date, description: descript,  pid: prof,completed: false };
+    console.log(newTask)
     setShowlist([...tasks, newTask]);
   }
   function deleteTask(id) {
@@ -116,20 +123,21 @@ function App(props) {
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
-
+console.log(showlist);
   return (
     <div className="container">
-      
+      {ProfileList}
+      <Profile addProfile={addProfile} />
       <figure align="center">
         <img src={imgsrc} alt="Logo"></img>
         <figcaption>ToDo App</figcaption>
       </figure>
       <Bank />
       <div><SearchBox handleSearch={handleSearch} /></div>
-      <Form className="task-item" addTask={addTask} />
+      <Form className="task-item" addTask={addTask} pid={prof}/>
       <br />
       <div className="filter-buttons">
-        {filterList}{ProfileList}
+        {filterList}
       </div>
       <h2 align="center">{headingText}</h2><br />
       <div className="card-grid">
