@@ -6,9 +6,9 @@ import Todo from "./components/Todo"; //in-prog
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import SearchBox from "./components/searchBox";
-import ProfileButton from "./components/profileButton";
 import Bank from "./components/Bank";
 import Profile from "./components/Profile";
+import Dropdown from "./components/dropdown";
 
 import './App.css';
 import imgsrc from './assets/logo.svg';
@@ -39,20 +39,8 @@ function App(props) {
     Default: () => true,
     sad: (task) => task.pid===prof,
   };
- const ProfileList = pidList.map((name) => (
-  <ProfileButton
-    key={name}
-    name={name}
-    isPressed={name === prof}
-    setProf={setProf}
-  />
-));
 console.log(`prof now is ${prof}`);
 
-  function profileScreener(pid) {
-    const remainingTasks = tasks.filter((task) => pid === task.pid);
-    setPidList(remainingTasks);
-  }
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -93,7 +81,7 @@ console.log(`prof now is ${prof}`);
   }
 
   function addProfile(name) {
-    
+    setProf(name);
     setPidList([...pidList, name]);
   }
 
@@ -126,7 +114,8 @@ console.log(`prof now is ${prof}`);
 console.log(showlist);
   return (
     <div className="container">
-      {ProfileList}
+      <Dropdown profiles={pidList} setProf={setProf}/>
+     
       <Profile addProfile={addProfile} />
       <figure align="center">
         <img src={imgsrc} alt="Logo"></img>
