@@ -88,8 +88,8 @@ console.log(`prof now is ${prof}`);
 
   function addTask(name, date, descript) {
     const newTask = { id: nanoid(), name, deadline: date, description: descript,  pid: prof,completed: false };
-    console.log(newTask)
-    setShowlist([...tasks, newTask]);
+    console.log(showlist);
+    setShowlist([...showlist, newTask]);
   }
   function deleteTask(id) {
     const remainingTasks = tasks.filter((task) => id !== task.id);

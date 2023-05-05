@@ -1,7 +1,7 @@
-const initialState=[];
+const initialState=[]; //profile list
 /* eslint-disable no-undef */
 export const reducer = (state=initialState,action)=>{
-    console.log(action);
+    console.log(`reducer : ${action}`);
     if (action.type==='add'){
         return [...state, action.payload.name];
     }

@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {actionCreators } from '../state/index';
-
+import {connect} from 'react-redux';
 import "../App.css"
+//import {profileAdd} from '../state/action-creators/index'
 
-function Profile(props) {
-    const dispatch = useDispatch();
+
+
+const Profile=({props,profileAdd})=> {
     const [name, setName] = useState("");
     function handleChange(e) {
         setName(e.target.value);
     }
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(actionCreators.profileAdd(props.pidList,name));
+        profileAdd([],name);
         //props.addProfile(name);
         setName("");
     }
@@ -39,4 +41,9 @@ function Profile(props) {
     );
 }
 
-export default Profile;
+
+const mapStateToProps=(state)=>({})
+
+const mapDispatchToProps=(dispatch)=>({profileAdd:(todo,name)=>(dispatch(actionCreators.profileAdd(todo,name)))})
+
+export default connect(mapStateToProps,mapDispatchToProps) (Profile);
