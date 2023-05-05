@@ -118,6 +118,7 @@ body {
   font-size: 16px;
   margin-right: 10px;
   cursor: pointer;
+  
 }
 
 .filter-button:hover {
@@ -125,6 +126,10 @@ body {
   color: rgb(0, 0, 0);
 }
 
+.filter-button:active {
+  background-color: #5a21c4;
+  color: rgb(255, 255, 255);
+}
 .btn:hover {
   background-color: #4cafad;
   color: rgb(255, 255, 255);
@@ -214,4 +219,103 @@ body {
 
 .searchfilter {
   display: none;
+}
+
+.profile-dropdown {
+  position:sticky;
+  display: inline-block;
+}
+
+.profile-dropdown figure {
+  display: inline-block;
+  margin: 5px;
+  vertical-align: middle;
+}
+
+.profile-dropdown:hover .profile-list {
+  display: block;
+}
+
+.profile-dropdown button {
+  background-color: cadetblue;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 4px;
+  color: rgb(250, 246, 246);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.profile-dropdown button:hover,
+.profile-dropdown button:focus {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.profile-list {
+  position: relative;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  margin: 0;
+  right: 0;
+  top: 100%;
+  transform: translateX(0%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.profile-list li {
+  margin-right: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.profile-list li:hover {
+  background-color: #f2f2f2;
+}
+
+.profile-list li.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.profile-list button {
+  background-color: cadetblue;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 4px;
+  color: rgb(250, 246, 246);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.profile-list button:hover,
+.profile-list button:focus {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.profile-dropdown figure.active {
+  background-color: #007bff;
+  color: #fff;
 }

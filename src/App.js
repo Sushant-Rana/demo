@@ -6,13 +6,21 @@ import Todo from "./components/Todo"; //in-prog
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import SearchBox from "./components/searchBox";
-import './App.css';
-import imgsrc from './assets/logo.svg'
+import Bank from "./components/Bank";
+import Profile from "./components/Profile";
+import Dropdown from "./components/dropdown";
 
+import './App.css';
+import imgsrc from './assets/logo.svg';
 //props=data=[]
 
 function App(props) {
+  const [pidList,setPidList]=useState(props.profile);
+
   const [filter, setFilter] = useState('All');
+  const [prof, setProf] = useState(pidList[0]);
+  const [showlist,setShowlist]=useState(props.tasks);
+  const [tasks,settsaks]=useState(props.tasks);
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.completed,
@@ -27,7 +35,12 @@ function App(props) {
       setFilter={setFilter}
     />
   ));
-  const [tasks, setTasks] = useState(props.tasks);
+  const PROFILE_MAP = {
+    Default: () => true,
+    sad: (task) => task.pid===prof,
+  };
+console.log(`prof now is ${prof}`);
+
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -39,12 +52,14 @@ function App(props) {
       }
       return task;
     });
-    setTasks(updatedTasks);
+    setShowlist(updatedTasks);
   }
-  var taskList = tasks
+  var taskList = showlist
     .filter(FILTER_MAP[filter])
+    .filter(PROFILE_MAP['sad'])
     .map((task) => (
       <Todo
+        pid={prof}
         id={task.id}
         name={task.name}
         completed={task.completed}
@@ -62,43 +77,53 @@ function App(props) {
     const filteredTasks = tasks.filter((task) =>
       task.name.toLowerCase().includes(query.toLowerCase())
     );
-    setTasks(filteredTasks);
+    setShowlist(filteredTasks);
+  }
+
+  function addProfile(name) {
+    setProf(name);
+    setPidList([...pidList, name]);
   }
 
 
   function addTask(name, date, descript) {
-    const newTask = { id: nanoid(), name, deadline: date, description: descript, completed: false };
-    setTasks([...tasks, newTask]);
+    const newTask = { id: nanoid(), name, deadline: date, description: descript,  pid: prof,completed: false };
+    console.log(newTask)
+    setShowlist([...tasks, newTask]);
   }
   function deleteTask(id) {
     const remainingTasks = tasks.filter((task) => id !== task.id);
-    setTasks(remainingTasks);
+    setShowlist(remainingTasks);
   }
   function editTask(id, newName, newDeadline) {
     const editedTaskList = tasks.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         //
-        return { ...task, name: newName, deadline: new Date(newDeadline) }
+        return { ...task, name: newName, deadline: newDeadline }
       }
       return task;
     });
-    setTasks(editedTaskList);
+    setShowlist(editedTaskList);
   }
 
 
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
-
+console.log(showlist);
   return (
     <div className="container">
+      <Dropdown profiles={pidList} setProf={setProf}/>
+     
+      <Profile addProfile={addProfile} />
       <figure align="center">
         <img src={imgsrc} alt="Logo"></img>
         <figcaption>ToDo App</figcaption>
       </figure>
+      <Bank />
       <div><SearchBox handleSearch={handleSearch} /></div>
-      <Form className="task-item" addTask={addTask} />
+      <Form className="task-item" addTask={addTask} pid={prof}/>
       <br />
       <div className="filter-buttons">
         {filterList}

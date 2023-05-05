@@ -4,14 +4,15 @@ import "../App.css"
 import {useSelector} from 'react-redux';
 
 
-function FilterButton(props) {
+function ProfileButton(props) {
+    console.log(props);
     return (
         
       <button
         type="button"
         className="filter-button"
         aria-pressed={props.isPressed}
-        onClick={() => props.setFilter(props.name)}
+        onClick={() => props.setProf(props.name)}
       >
         <span className="visually-hidden">Show </span>
         <span>{props.name}</span>
@@ -19,4 +20,4 @@ function FilterButton(props) {
       </button>
     );
   }
-export default FilterButton;
+export default ProfileButton;
