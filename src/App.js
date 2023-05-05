@@ -37,13 +37,14 @@ function App(props) {
   ));
   const PROFILE_MAP = {
     Default: () => true,
-    sad: (task) => task.pid===prof,
+    Basic: (task) => task.pid===prof,
   };
 console.log(`prof now is ${prof}`);
 
 
   function toggleTaskCompleted(id) {
-    const updatedTasks = tasks.map((task) => {
+    console.log(`completed: ${id}`)
+    const updatedTasks = showlist.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         // use object spread to make a new object
@@ -56,7 +57,7 @@ console.log(`prof now is ${prof}`);
   }
   var taskList = showlist
     .filter(FILTER_MAP[filter])
-    .filter(PROFILE_MAP['sad'])
+    .filter(PROFILE_MAP['Basic'])
     .map((task) => (
       <Todo
         pid={prof}
@@ -80,12 +81,6 @@ console.log(`prof now is ${prof}`);
     setShowlist(filteredTasks);
   }
 
-  function addProfile(name) {
-    setProf(name);
-    setPidList([...pidList, name]);
-  }
-
-
   function addTask(name, date, descript) {
     const newTask = { id: nanoid(), name, deadline: date, description: descript,  pid: prof,completed: false };
     console.log(showlist);
@@ -96,6 +91,7 @@ console.log(`prof now is ${prof}`);
     setShowlist(remainingTasks);
   }
   function editTask(id, newName, newDeadline) {
+    console.log(`editTask: ${id}`)
     const editedTaskList = tasks.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
@@ -115,7 +111,6 @@ console.log(showlist);
   return (
     <div className="container">
       <Dropdown profiles={pidList} setProf={setProf}/>
-     
       <Profile pidList={pidList}/>
       <figure align="center">
         <img src={imgsrc} alt="Logo"></img>

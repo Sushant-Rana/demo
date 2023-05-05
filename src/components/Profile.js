@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import {actionCreators } from '../state/index';
-import {connect} from 'react-redux';
+import { actionCreators } from '../state/index';
+import { connect } from 'react-redux';
 import "../App.css"
 //import {profileAdd} from '../state/action-creators/index'
 
 
 
-const Profile=({props,profileAdd})=> {
+const Profile = ({ props, profileAdd }) => {
     const [name, setName] = useState("");
     function handleChange(e) {
         setName(e.target.value);
     }
     function handleSubmit(e) {
         e.preventDefault();
-        profileAdd([],name);
+        profileAdd([], name);
         //props.addProfile(name);
         setName("");
     }
@@ -33,7 +33,7 @@ const Profile=({props,profileAdd})=> {
                 placeholder="Profile Name"
                 onChange={handleChange}
             />
-           
+
             <button type="submit" className="btn btn__primary btn__lg">
                 Add Profile
             </button>
@@ -42,8 +42,8 @@ const Profile=({props,profileAdd})=> {
 }
 
 
-const mapStateToProps=(state)=>({})
+const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps=(dispatch)=>({profileAdd:(todo,name)=>(dispatch(actionCreators.profileAdd(todo,name)))})
+const mapDispatchToProps = (dispatch) => ({ profileAdd: (todo, name) => (dispatch(actionCreators.profileAdd(todo, name))) })
 
-export default connect(mapStateToProps,mapDispatchToProps) (Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
