@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "../App.css"
 
+//import { useSelector, useDispatch } from 'react-redux';
+//import {actionCreators } from '../state/index';
+
+
 class Form extends Component {
   constructor(props) {
 
@@ -41,6 +45,8 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    //const dispatch = useDispatch();
+    //dispatch(actionCreators.todoAdd(this.state.name, this.state.date, this.state.description));
     this.props.addTask(this.state.name, this.state.date, this.state.description);
     this.setState({ name: "", date: "", description: "" });
   }
