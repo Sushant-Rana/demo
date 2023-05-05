@@ -1,14 +1,19 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import {actionCreators } from '../state/index';
+
 import "../App.css"
 
 function Profile(props) {
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
     function handleChange(e) {
         setName(e.target.value);
     }
     function handleSubmit(e) {
         e.preventDefault();
-        props.addProfile(name);
+        dispatch(actionCreators.profileAdd(props.pidList,name));
+        //props.addProfile(name);
         setName("");
     }
     return (

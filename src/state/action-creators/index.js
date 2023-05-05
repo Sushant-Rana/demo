@@ -7,11 +7,11 @@ export const depositMoney=(amount)=>{
     }
 }
 
-export const profileSelector=(id)=>{
-    console.log(id);
+export const profileAdd=(list,name)=>{
+    console.log(`ActionCreator- ${name}`);
     return(dispatch)=>{
         dispatch({
-            type:'change',
-        payload:id})
+            type:'add',
+        payload:{name:name,list:list}})
     }
 }

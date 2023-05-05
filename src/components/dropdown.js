@@ -43,8 +43,12 @@ const ProfileDropdown = (props) => {
 
 
 function Dropdown(props) {
+
+  const data = useSelector(state => state.profile);
+  console.log(`data ${data}`)
+
   const [expanded, setExpanded] = useState(false);
-  const [selectedProfile, setSelectedProfile] = useState(props.profiles[0]);
+  const [selectedProfile, setSelectedProfile] = useState(data[0]);
 
   const handleProfileSelect = (profile) => {
     setSelectedProfile(profile);
@@ -64,7 +68,7 @@ function Dropdown(props) {
       </button>
       {expanded && (
         <ul className="profile-list">
-          {props.profiles.map((profile) => (
+          {data.map((profile) => (
             <li key={profile}>
             <button
               className="profile-option"

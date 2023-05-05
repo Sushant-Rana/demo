@@ -1,8 +1,9 @@
+const initialState=[];
 /* eslint-disable no-undef */
-const reducer = (state=0,action)=>{
+export const reducer = (state=initialState,action)=>{
     console.log(action);
-    if (action.type==='change'){
-        return action.payload;
+    if (action.type==='add'){
+        return [...state, action.payload.name];
     }
     else{
         console.log(state);

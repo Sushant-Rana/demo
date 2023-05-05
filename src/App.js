@@ -116,7 +116,7 @@ console.log(showlist);
     <div className="container">
       <Dropdown profiles={pidList} setProf={setProf}/>
      
-      <Profile addProfile={addProfile} />
+      <Profile pidList={pidList}/>
       <figure align="center">
         <img src={imgsrc} alt="Logo"></img>
         <figcaption>ToDo App</figcaption>
