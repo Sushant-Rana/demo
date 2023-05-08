@@ -5,9 +5,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 export function* getKanyeApi() {
     try {
         console.log(`Kanye saga`)
-        const result = yield fetch('https://api.kanye.rest');
+        const result = yield fetch('https://api.quotable.io/random');
         const data = yield result.json();
-        const sidebar = data.quote;
+        const sidebar = data.content;
         console.log(data);
         yield put({ type: 'kanye_success', sidebar });
     } catch (error) {

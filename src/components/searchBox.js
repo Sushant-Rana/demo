@@ -15,8 +15,8 @@ console.log('data is:',data._root.entries[0][1])
   }
 
   return (<div >
+    <p align="center"> {data._root.entries[0][1]}<br /></p>
     <form className="search-box" onSubmit={handleSearch}>
-      {data._root.entries[0][1]}<br />
       <input type="text" value={searchQuery} onChange={handleInputChange} placeholder="Enter here ..." />
       <button className="search-button" type="submit">Search</button>
     </form></div>
