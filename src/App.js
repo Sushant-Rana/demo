@@ -20,7 +20,7 @@ function App(props) {
   const [filter, setFilter] = useState('All');
   const [prof, setProf] = useState(pidList[0]);
   const [showlist,setShowlist]=useState(props.tasks);
-  const [tasks,settsaks]=useState(props.tasks);
+  //const [tasks,settsaks]=useState(props.tasks);
   const FILTER_MAP = {
     All: () => true,
     Active: (task) => !task.completed,
@@ -75,7 +75,7 @@ console.log(`prof now is ${prof}`);
 
 
   function handleSearch(query) {
-    const filteredTasks = tasks.filter((task) =>
+    const filteredTasks = showlist.filter((task) =>
       task.name.toLowerCase().includes(query.toLowerCase())
     );
     setShowlist(filteredTasks);
@@ -87,12 +87,12 @@ console.log(`prof now is ${prof}`);
     setShowlist([...showlist, newTask]);
   }
   function deleteTask(id) {
-    const remainingTasks = tasks.filter((task) => id !== task.id);
+    const remainingTasks = showlist.filter((task) => id !== task.id);
     setShowlist(remainingTasks);
   }
   function editTask(id, newName, newDeadline) {
     console.log(`editTask: ${id}`)
-    const editedTaskList = tasks.map((task) => {
+    const editedTaskList = showlist.map((task) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         //
@@ -104,7 +104,7 @@ console.log(`prof now is ${prof}`);
   }
 
 
-  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+  const tasksNoun = taskList.length !== 1 ? 'showlist' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
 console.log(showlist);
