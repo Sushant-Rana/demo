@@ -15,3 +15,13 @@ export const profileAdd=(list,name)=>{
         payload:{name:name,list:list}})
     }
 }
+
+
+export const kanye=()=>{
+    console.log(`In kanye action`);
+    return(dispatch)=>{
+        dispatch({
+            type:'kanye',
+       payload:{}})
+    }
+}

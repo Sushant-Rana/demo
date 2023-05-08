@@ -1,13 +1,31 @@
 /* eslint-disable no-undef */
-const reducer = (state=0,action)=>{
-    console.log(action);
-    if (action.type==='desposit'){
-        return state+action.payload;
+import { fromJS } from 'immutable';
+const initialState = fromJS({
+    quote: '',
+    assetUploading: false,
+    fetchingAllAssets: false,
+  });
+const reducer = (state=initialState,action)=>{
+    console.log('action in reducer is:',action);
+    if (action.type==='kanye_success'){
+        return state
+          .set('quote', action.sidebar)
+          .set('fetchingAllAssets', false)
+          .set('fetchAllAssetSuccess', true);
     }
-    else{
+    else if(action.type==='kanye_failure'){
         console.log(state);
-        return state;
+        return state
+        .set('quote', action.error)
+        .set('fetchingAllAssets', true)
+        .set('fetchAllAssetSuccess', false
+        );
     }
+    return state;
 }
+
+
+
+
 
 export default reducer;

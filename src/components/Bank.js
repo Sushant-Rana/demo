@@ -8,7 +8,7 @@ function Bank(props) {
   console.log(data)
 
   return (
-   <><button className="mocke" onClick={()=>{dispatch(actionCreators.depositMoney(10))}}>Deposi 10</button>
+   <><button className="mocke" onClick={()=>{dispatch(actionCreators.kanye())}}>Kanye Kots</button>
 </>
   );
 }
